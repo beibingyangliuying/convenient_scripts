@@ -6,7 +6,8 @@
 
 # 环境配置
 
-环境配置文件请参照[references.txt]()，我目前使用的Python版本是3.10。
+环境配置文件请参照[references.txt](https://github.com/beibingyangliuying/convenient_scipts/blob/master/requirements.txt)
+，我目前使用的Python版本是3.10。
 
 通过Powershell配置Python环境：
 

@@ -7,7 +7,8 @@ The individual scripts are relatively independent, their usages are pointed out 
 
 # Environment Configuration
 
-Please refer to [references.txt]() for environment configuration. The version of Python I am currently using is 3.10.
+Please refer to [references.txt](https://github.com/beibingyangliuying/convenient_scipts/blob/master/requirements.txt)
+for environment configuration. The version of Python I am currently using is 3.10.
 
 Configure your Python environment through powershell:
 

@@ -8,13 +8,13 @@
 
 环境配置文件请参照[references.txt]()，我目前使用的Python版本是3.10。
 
-以如下方式配置Python环境：
+通过Powershell配置Python环境：
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-如果需要使用镜像网站，方式如下：
+如果需要使用镜像网站，如下：
 
 ```powershell
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple

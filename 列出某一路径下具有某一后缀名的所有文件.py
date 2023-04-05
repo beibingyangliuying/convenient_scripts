@@ -5,6 +5,10 @@ from PyQt6.QtWidgets import *
 
 
 class MainWindow(QMainWindow):
+    """
+    主界面类
+    """
+
     def __init__(self):
         super().__init__()
 
@@ -44,6 +48,7 @@ class MainWindow(QMainWindow):
 app = QApplication([])
 window = MainWindow()
 
+# 选定根目录
 root_path = QFileDialog.getExistingDirectory(caption="选择文件夹", options=QFileDialog.Option.ShowDirsOnly)
 path = pathlib.Path(root_path)
 
@@ -51,10 +56,12 @@ if not path.exists():
     QMessageBox.warning(window, "警告", "指定文件夹不存在！")
     exit(1)
 
+# 指定后缀名（不用加.）
 suffix, ok = QInputDialog.getText(window, '输入框', '请输入文件后缀名：')
 if not ok:
     QMessageBox.information(window, '信息', '未输入后缀名！程序终止！')
     exit(0)
 
+# 运行程序
 window.show()
 sys.exit(app.exec())

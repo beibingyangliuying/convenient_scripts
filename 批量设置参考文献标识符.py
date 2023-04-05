@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on 2023/3/29 23:20
-
-@author: chenjunhan
-"""
 import bibtexparser
 import re
 from PyQt6.QtWidgets import QApplication, QFileDialog, QMessageBox, QWidget
@@ -36,4 +30,5 @@ for entry in bib_database.entries:
 with open(file_path, mode='w', encoding='utf-8') as f:
     bibtexparser.dump(bib_database, f)
 
+# 程序终止
 QMessageBox.information(widget, 'End', '文献标识符已格式化完毕！')

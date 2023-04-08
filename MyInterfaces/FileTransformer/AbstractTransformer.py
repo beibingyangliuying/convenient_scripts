@@ -11,7 +11,7 @@ class AbstractTransformer(QMainWindow):
         self.file_paths = QStringListModel([])
         self.input_type = input_type
         self.output_type = output_type
-        self.output_path = None
+        self.output_path = str(pathlib.Path.cwd())
 
         self.init_ui()
         self.init_action()
@@ -63,7 +63,7 @@ class AbstractTransformer(QMainWindow):
         self.lineedit_output = QLineEdit(self)
         self.lineedit_output.setGeometry(QRect(80, 350, 300, 20))
         self.lineedit_output.setReadOnly(True)
-        self.lineedit_output.setText(str(pathlib.Path.cwd()))
+        self.lineedit_output.setText(self.output_path)
 
         # 自定义快捷键菜单
         self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)

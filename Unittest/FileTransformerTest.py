@@ -1,15 +1,16 @@
 import unittest
 
 
-class FileTransformertestcase(unittest.TestCase):
-    def test_init_ui(self):
-        from MyInterfaces.FileTransformer.Pdf2SvgTransformer import Pdf2SvgTransformer
+class FileTransformerTestcase(unittest.TestCase):
+    def test_ui(self):
+        from MyInterfaces.FileTransformer.Interface import Interface
         from PyQt6.QtWidgets import QApplication
 
         app = QApplication([])
-        window = Pdf2SvgTransformer()
-        window.show()
-        exit(app.exec())
+        ui = Interface()
+        ui.show()
+
+        self.assertEqual(app.exec(), 0)
 
 
 if __name__ == '__main__':

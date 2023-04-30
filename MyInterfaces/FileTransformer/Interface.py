@@ -90,10 +90,3 @@ class Interface(QDialog):
         self.file_paths.setStringList([])
         in_type = self.ui.comboBox_in_type.currentText()
         self.ui.comboBox_out_type.setModel(QStringListModel(Context.supported[in_type].keys()))
-
-
-if __name__ == '__main__':
-    app = QApplication([])
-    ui = Interface()
-    ui.show()
-    app.exec()

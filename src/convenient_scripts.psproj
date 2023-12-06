@@ -11,25 +11,18 @@ ClassName=TProjectFilesNode
 
 [Project\ChildNodes\Node0\ChildNodes\Node0]
 ClassName=TProjectFolderNode
-Name=document_converter
+Name=latex
 
 [Project\ChildNodes\Node0\ChildNodes\Node0\ChildNodes\Node0]
 ClassName=TProjectFileNode
-FileName=$[Project-Path]document_converter\pdf2svg.py
+FileName=$[Project-Path]latex\reference_id_formatter.py
 
 [Project\ChildNodes\Node0\ChildNodes\Node0\ChildNodes]
 Count=1
 
 [Project\ChildNodes\Node0\ChildNodes\Node1]
-ClassName=TProjectFolderNode
-Name=latex
-
-[Project\ChildNodes\Node0\ChildNodes\Node1\ChildNodes\Node0]
 ClassName=TProjectFileNode
-FileName=$[Project-Path]latex\reference_id_formatter.py
-
-[Project\ChildNodes\Node0\ChildNodes\Node1\ChildNodes]
-Count=1
+FileName=$[Project-Path]document_converter.py
 
 [Project\ChildNodes\Node0\ChildNodes]
 Count=2

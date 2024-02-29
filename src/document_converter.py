@@ -1,19 +1,5 @@
-# -------------------------------------------------------------------------------
-# Name:        document_converter
-# Purpose:     Execute file conversion.
-#
-# Author:      chenjunhan
-#
-# Created:     05/12/2023
-# Copyright:   (c) chenjunhan 2023
-# Licence:     MIT
-# -------------------------------------------------------------------------------
-"""
-Execute file conversion.
-"""
-
-from typing import Generator
 from pathlib import Path
+from typing import Generator
 
 import fitz
 from PyQt6.QtWidgets import QApplication, QFileDialog, QWidget, QMessageBox
@@ -21,7 +7,10 @@ from PyQt6.QtWidgets import QApplication, QFileDialog, QWidget, QMessageBox
 
 def get_pdf_pages(file: Path) -> Generator[fitz.Page, None, None]:
     """
-    Generator function that traverses and generates pdf file pages.
+    Get the pages of the PDF file.
+    :param file: The PDF file to be converted.
+    :type file: Path
+    :return: The pages of the PDF file.
     """
     print(f"Converting: {file.absolute()}")
 
@@ -38,35 +27,69 @@ def get_pdf_pages(file: Path) -> Generator[fitz.Page, None, None]:
             yield page
 
 
-def pdf2svg(file: Path, destination: Path):
+def pdf2svg(file: Path, destination: Path) -> None:
     """
-    Convert each page of the specified pdf file to svg file and save it in the specified directory.
+    Convert the PDF file to SVG.
+    :param file: The PDF file to be converted.
+    :param destination: The PDF file to be converted.
+    :return: None
     """
     for count, page in enumerate(get_pdf_pages(file)):
         svg_page = page.get_svg_image()
         svg_file_name = f"{file.stem}_{count}.svg"
 
         with (destination / Path(svg_file_name)).open(
-            "w", encoding="utf-8"
+                "w", encoding="utf-8"
         ) as svg_file:
             svg_file.write(svg_page)
-            print(f"Page {count+1} finished.")
+            print(f"Page {count + 1} finished.")
 
     print("-" * 30)
 
 
-supported = {"pdf": {"svg": pdf2svg}}
-
-
-def main():
+def pdf2png(file: Path, destination: Path) -> None:
     """
-    Perform file conversion.
+    Convert the PDF file to PNG.
+    :param file: The path to the PDF file to be converted.
+    :param destination: The path to the directory where the PNG images will be saved.
+    :return: None
+    """
+    for count, page in enumerate(get_pdf_pages(file)):
+        png_page = page.get_pixmap(dpi=300)
+        png_file_name = f"{file.stem}_{count}.png"
+        png_page.save(destination / Path(png_file_name))
+
+        print(f"Page {count + 1} finished.")
+
+    print("-" * 30)
+
+
+def svg2pdf(file: Path, destination: Path) -> None:
+    """
+    Convert the SVG file to PDF.
+    :param file: The path to the PDF file to be converted.
+    :param destination: The path to the directory where the PNG images will be saved.
+    :return: None
+    """
+    pass
+
+
+supported = {"pdf": {"svg": pdf2svg, "png": pdf2png}}
+
+
+def main() -> None:
+    """
+    The main function of the application.
+    :return: None
     """
     app = QApplication([])
     widget = QWidget()
 
+    # Determine the input and output file types.
     input_format = input(
-        "Please select the input file type:\nOptional: {0}\n".format(",".join(supported))
+        "Please select the input file type:\nOptional: {0}\n".format(
+            ",".join(supported)
+        )
     )
     print("-" * 30)
     output_format = input(
@@ -77,6 +100,7 @@ def main():
     print("-" * 30)
     converter = supported[input_format][output_format]
 
+    # Select the files to be converted.
     files, _ = QFileDialog.getOpenFileNames(
         widget,
         f"Select {input_format.upper()} Files",
@@ -97,8 +121,9 @@ def main():
     for file in files:
         print(file)
     print("-" * 30)
-    print("Select the output directory:")
 
+    # Select the output directory.
+    print("Select the output directory:")
     destination = QFileDialog.getExistingDirectory(widget, "Select Output Directory")
     if not destination:
         QMessageBox.information(

@@ -1,28 +1,15 @@
-# -------------------------------------------------------------------------------
-# Name:        reference_id_formatter
-# Purpose:     Format the reference identifier in the biblatex reference database.
-#
-# Author:      chenjunhan
-#
-# Created:     26/11/2023
-# Copyright:   (c) chenjunhan 2023
-# Licence:     MIT
-# -------------------------------------------------------------------------------
-"""
-Format the reference identifier in the biblatex reference database.
-The standard format is `title`+'_'+`first_author`.
-"""
-
 import os
 import re
 import string
+
 import bibtexparser
 from PyQt6.QtWidgets import QApplication, QFileDialog, QMessageBox, QWidget
 
 
-def main():
+def main() -> None:
     """
-    Execute formatting.
+    The main function of the application.
+    :return: None
     """
     app = QApplication([])
     widget = QWidget()
@@ -48,16 +35,13 @@ def main():
     # Matches one or more consecutive ASCII punctuation marks and whitespace characters.
     pattern = re.compile("[" + re.escape(string.punctuation) + r"\s" + "]+")
 
-    def clarify(field: str):
-        return re.sub(pattern, "_", field)
-
     for entry in bib_database.entries:
         title = entry.get("title", "untitled")
-        title = clarify(title)
+        title = clarify(pattern, title)
 
         authors = entry.get("author", "authorless").split(" and ")
         first_author = authors[0]
-        first_author = clarify(first_author)
+        first_author = clarify(pattern, first_author)
 
         entry["ID"] = title + "_" + first_author
 
@@ -69,6 +53,10 @@ def main():
     )
 
     app.quit()
+
+
+def clarify(pattern, field: str):
+    return re.sub(pattern, "_", field)
 
 
 if __name__ == "__main__":

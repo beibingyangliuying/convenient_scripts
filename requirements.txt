@@ -1,5 +1,0 @@
-pymupdf==1.23.25; python_version >= '3.8'
-pymupdfb==1.23.22; python_version >= '3.8'
-pyqt6==6.6.1; python_full_version >= '3.6.1'
-pyqt6-qt6==6.6.2
-pyqt6-sip==13.6.0; python_version >= '3.7'

@@ -3,13 +3,10 @@ from pathlib import Path
 from typing import Callable, Generator, Union
 
 import fitz
-from colorama import init, Fore, Style
-
-init()
 
 
 def get_suffixed_files(directory: str, suffix: str) -> Generator[Path, None, None]:
-    directory = Path(directory)
+    directory: Path = Path(directory)
     return (i for i in directory.iterdir() if i.is_file() and i.suffix == f".{suffix}")
 
 
@@ -56,27 +53,23 @@ def convert_factory(
 
 def main() -> None:
     input_format, output_format = input(
-        f"Document converter. Please enter the {Fore.YELLOW}input format{Style.RESET_ALL} and {Fore.YELLOW}output format{Style.RESET_ALL} (separated by {Fore.RED}comma{Style.RESET_ALL}): "
+        "Document converter. Please enter the input format and output format (separated by comma): "
     ).split(",")
     func = convert_factory(input_format, output_format)
-    departure = input(
-        f"Please enter the {Fore.YELLOW}departure directory{Style.RESET_ALL}: "
-    ).strip("\"'")
+    departure = input("Please enter the departure directory: ").strip("\"'")
     print("The following files will be converted: ")
     for i in get_suffixed_files(departure, input_format):
-        print(Fore.GREEN + str(i) + Style.RESET_ALL)
+        print(str(i))
     if_ok = input("Confirm conversion? [y/n]: ")
     assert if_ok == "y" or if_ok == "n"
     if if_ok == "n":
-        print(Fore.RED + "The process is terminated!" + Style.RESET_ALL)
+        print("The process is terminated!")
         return
 
     if func.__kwdefaults__:
-        print(
-            f"Positional parameters: {Fore.BLUE}{func.__kwdefaults__}{Style.RESET_ALL}"
-        )
+        print(f"Positional parameters: {func.__kwdefaults__}")
         arguments = input(
-            f'Please enter the values of positional parameters in {Fore.BLUE}"key=value"{Style.RESET_ALL} format and separated by {Fore.RED}comma{Style.RESET_ALL} (press enter to skip):'
+            'Please enter the values of positional parameters in "key=value" format and separated by comma (press enter to skip):'
         )
         if arguments:
             func = ft.partial(
@@ -85,12 +78,12 @@ def main() -> None:
             )
 
     destination = input(
-        f'Please enter the {Fore.YELLOW}destination directory{Style.RESET_ALL} (press enter to use "{Fore.GREEN}{departure}{Style.RESET_ALL}"): '
+        f'Please enter the destination directory (press enter to use "{departure}"): '
     ).strip("\"'")
     if not destination:
         destination = departure
     func(departure, destination)
-    print(Fore.GREEN + "Conversion completed!" + Style.RESET_ALL)
+    print(+"Conversion completed!")
 
 
 if __name__ == "__main__":

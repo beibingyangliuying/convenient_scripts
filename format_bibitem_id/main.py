@@ -3,23 +3,12 @@ import string
 from pathlib import Path
 
 import bibtexparser as bibtex
-from colorama import init, Fore, Style
-
-init()
 
 
 def main() -> None:
-    path = Path(
-        input(
-            f"Please input the path of {Fore.YELLOW}.bib{Style.RESET_ALL} file: "
-        ).strip("\"'")
-    )
+    path = Path(input("Please input the path of .bib file: ").strip("\"'"))
     if not path.is_file() or not path.suffix == ".bib":
-        print(
-            Fore.RED
-            + "Please select a valid .bib file! The process is terminated!"
-            + Style.RESET_ALL
-        )
+        print("Please select a valid .bib file! The process is terminated!")
         return
 
     with path.open(mode="r", encoding="utf-8") as f:
@@ -37,17 +26,16 @@ def main() -> None:
         old_id = entry["ID"]
         new_id = f"{title}_{authors[0]}"
         entry["ID"] = new_id
-        print(Fore.BLUE + old_id + "\t->\t" + Fore.GREEN + new_id + Style.RESET_ALL)
-
+        print(old_id + "\t->\t" + new_id)
     if_ok = input("Confirm format? [y/n]: ")
     assert if_ok == "y" or if_ok == "n"
 
     if if_ok == "y":
         with path.open(mode="w", encoding="utf-8") as f:
             bibtex.dump(bib_database, f)
-            print(Fore.GREEN + "Done!" + Style.RESET_ALL)
+            print("Done!")
     else:
-        print(Fore.RED + "The process is terminated!" + Style.RESET_ALL)
+        print("The process is terminated!")
 
 
 def format_id(field: str) -> str:

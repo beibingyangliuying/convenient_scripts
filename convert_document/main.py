@@ -83,7 +83,7 @@ def main() -> None:
     if not destination:
         destination = departure
     func(departure, destination)
-    print(+"Conversion completed!")
+    print("Conversion completed!")
 
 
 if __name__ == "__main__":

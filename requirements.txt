@@ -6,9 +6,10 @@ dependencies:
   - bibtexparser=1.4.1=pyhd8ed1ab_0
   - black=24.4.2=py311h1ea47a8_0
   - bzip2=1.0.8=hcfcfb64_5
-  - ca-certificates=2024.6.2=h56e8100_0
+  - ca-certificates=2024.7.4=h56e8100_0
   - click=8.1.7=win_pyh7428d3b_0
   - colorama=0.4.6=pyhd8ed1ab_0
+  - isort=5.13.2=pyhd8ed1ab_0
   - libexpat=2.6.2=h63175ca_0
   - libffi=3.4.2=h8ffe710_5
   - libsqlite=3.46.0=h2466b09_0

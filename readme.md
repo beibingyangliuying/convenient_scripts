@@ -1,4 +1,4 @@
-# Welcome
+# Convenient scripts
 
 This is `convenient_scripts`, the purpose of this toolkit is to simplify daily workflow by providing some ready-to-use scripts.
 

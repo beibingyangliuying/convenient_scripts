@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "convenient-scripts"
+version = "0.1.0"
+description = "A few ready-to-use Python scripts in daily workflow."
+authors = ["chenjunhan <beibingyangliuying@foxmail.com>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+bibtexparser = "^1.4.1"
+PyMuPDF = "^1.24.9"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.11.2"
+ruff = "^0.6.3"
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
